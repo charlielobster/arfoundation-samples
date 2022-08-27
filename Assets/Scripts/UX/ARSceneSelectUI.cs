@@ -89,6 +89,22 @@ namespace UnityEngine.XR.ARFoundation.Samples
             set => m_LightEstimationMenu = value;
         }
 
+        [SerializeField]
+        GameObject m_IdleMenu;
+        public GameObject idleMenu
+        {
+            get => m_IdleMenu;
+            set => m_IdleMenu = value;
+        }
+
+        [SerializeField]
+        GameObject m_ContinuousMenu;
+        public GameObject continuousMenu
+        {
+            get => m_ContinuousMenu;
+            set => m_ContinuousMenu = value;
+        }
+
         void Start()
         {
             if(ActiveMenu.currentMenu == MenuType.FaceTracking)
@@ -124,6 +140,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
             else if(ActiveMenu.currentMenu == MenuType.LightEstimation)
             {
                 m_LightEstimationMenu.SetActive(true);
+                m_AllMenu.SetActive(false);
+            }
+            else if(ActiveMenu.currentMenu == MenuType.Idle)
+            {
+                m_IdleMenu.SetActive(true);
+                m_AllMenu.SetActive(false);
+            }
+            else if(ActiveMenu.currentMenu == MenuType.Continuous)
+            {
+                m_ContinuousMenu.SetActive(true);
                 m_AllMenu.SetActive(false);
             }
             ScrollToStartPosition();
@@ -215,6 +241,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
         public void ConfigChooserButtonPressed()
         {
             LoadScene("ConfigurationChooser");
+        }
+
+        public void IdleButtonPressed()
+        {
+            LoadScene("Idle");
+        }
+
+        public void ContinuousButtonPressed()
+        {
+            LoadScene("Continuous");
         }
 
         public void FaceTrackingMenuButtonPressed()
@@ -334,6 +370,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_MeshingMenu.SetActive(false);
             m_DepthMenu.SetActive(false);
             m_LightEstimationMenu.SetActive(false);
+            m_IdleMenu.SetActive(false);
+            m_ContinuousMenu.SetActive(false);
             m_AllMenu.SetActive(true);
             ScrollToStartPosition();
         }
